@@ -48,6 +48,7 @@ function Contact() {
             </div>
             <div className='send-button-container'>
               <button className='send-button' type="submit">Send</button>
+              <div></div>
             </div>
             </form>
           <div className='contact-pic-container'>
