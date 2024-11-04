@@ -13,7 +13,7 @@ export default function Navbar() {
     <header>
         <Link to='/' className='title'>Justine Ocken</Link>
         <nav>
-            <Link to="/" className="link">HOE</Link>
+            <Link to="/" className="link">HOME</Link>
             {/* <Link to="/products" className="link">PRODUCTS</Link> */}
             <Link to="/gallery" className="link">GALLERY</Link>
             <Link to="/about" className="link">ABOUT</Link>
