@@ -9,7 +9,7 @@ function Contact() {
     setResult("Sending....");
     const formData = new FormData(event.target);
 
-    formData.append("access_key", "e71062bb-4879-43f5-b5b8-2e799bf5ceed");
+    formData.append("access_key", "8f1310d6-55b7-425d-8e4c-bab40f64a599");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -33,7 +33,6 @@ function Contact() {
         <div className="contact-container">
           <form onSubmit={onSubmit} className='contact-form'>
             <div className='contact-form-title'>Lets Talk!</div>
-            <input type="hidden" name="access_key" value="e71062bb-4879-43f5-b5b8-2e799bf5ceed"/>
             <div className='input-space'>
               {/* <label>Name</label> */}
               <input placeholder='Name' className='name-input' id="input" type="text" name="name" required/>
