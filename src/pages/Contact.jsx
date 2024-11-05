@@ -50,9 +50,6 @@ function Contact() {
               <button className='send-button' type="submit">Send</button>
               <div className='socials-container'>
                 <a target='_blank' href='https://www.instagram.com/art_justine58/'><img className='socials-icon' src="/images/instagramLogo.png"/></a>
-                <img className='socials-icon' src="/images/facebookLogo.png"/>
-                <img className='socials-icon' src="/images/twitterLogo.png"/>
-                <img className='socials-icon' src="/images/linkedinLogo.jpg"/>
               </div>
             </div>
             </form>

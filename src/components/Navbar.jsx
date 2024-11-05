@@ -10,7 +10,6 @@ export default function Navbar() {
             <Link to="/" className="link">HOME</Link>
             {/* <Link to="/products" className="link">PRODUCTS</Link> */}
             <Link to="/gallery" className="link">GALLERY</Link>
-            <Link to="/about" className="link">ABOUT</Link>
             <Link to="/contact" className="link">CONTACT</Link>
             {/* <div className='cart-area'>
               <Link to="/checkout" className="link"><ShoppingBasket/></Link>

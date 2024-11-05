@@ -250,10 +250,13 @@ label{
   line-height: 1.7rem;
 }
 
+
+
 .last-about-desc{
   width:700px;
   font-size:20px;
   text-align: center;
+  line-height: 1.7rem;
 }
 
 .section-img{
@@ -280,7 +283,7 @@ label{
   gap:50px;
   margin-bottom:5rem;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  padding:40px;
+  padding:50px;
 }
 
 .section1{
