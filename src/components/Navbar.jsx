@@ -1,17 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { ShoppingBasket } from 'lucide-react';
-import { useState } from 'react'
 
-//Probably make navbar words all caps, change font
-//Add in the cart button later; get symbol
 export default function Navbar() {
-
-  const [cart, setCart] = useState(0)
-
   return (
     <header>
-        <Link to='/' className='title'>Justine Ocken</Link>
+        {/* <Link to='/' className='title'>Justine Ocken</Link> */}
+        <Link to='/'><img className="title-img" src="/images/justine-logo-removebg-preview.png"/></Link>
         <nav>
             <Link to="/" className="link">HOME</Link>
             {/* <Link to="/products" className="link">PRODUCTS</Link> */}

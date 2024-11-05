@@ -35,20 +35,25 @@ function Contact() {
             <div className='contact-form-title'>Lets Talk!</div>
             <input type="hidden" name="access_key" value="e71062bb-4879-43f5-b5b8-2e799bf5ceed"/>
             <div className='input-space'>
-              <label>Name</label>
-              <input className='name-input' id="input" type="text" name="name" required/>
+              {/* <label>Name</label> */}
+              <input placeholder='Name' className='name-input' id="input" type="text" name="name" required/>
             </div>
             <div className='input-space'>
-              <label>Email</label>
-              <input className='email-input' id="input" type="email" name="email" required/>
+              {/* <label>Email</label> */}
+              <input placeholder='Email' className='email-input' id="input" type="email" name="email" required/>
             </div>
             <div className='input-space'>
-              <label>Message</label>
-              <textarea className='message-input' name="message" required></textarea>
+              {/* <label>Message</label> */}
+              <textarea placeholder='Message' className='message-input' name="message" required></textarea>
             </div>
             <div className='send-button-container'>
               <button className='send-button' type="submit">Send</button>
-              <div></div>
+              <div className='socials-container'>
+                <a target='_blank' href='https://www.instagram.com/art_justine58/'><img className='socials-icon' src="/images/instagramLogo.png"/></a>
+                <img className='socials-icon' src="/images/facebookLogo.png"/>
+                <img className='socials-icon' src="/images/twitterLogo.png"/>
+                <img className='socials-icon' src="/images/linkedinLogo.jpg"/>
+              </div>
             </div>
             </form>
           <div className='contact-pic-container'>
