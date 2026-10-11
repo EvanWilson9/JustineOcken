@@ -1,0 +1,94 @@
+:root {
+  --paper: #f3eee4;
+  --ivory: #e8e1d2;
+  --cream: #ddd4c2;
+  --sage: #7f8f73;
+  --olive: #5e6d54;
+  --forest: #2f3c33;
+  --brown: #6a5344;
+  --taupe: #9a8976;
+  --charcoal: #322d28;
+  --terracotta: #a65b42;
+  --line: rgba(50, 45, 40, 0.14);
+  --line-strong: rgba(50, 45, 40, 0.28);
+  --ink-soft: rgba(50, 45, 40, 0.68);
+  --serif: "Cormorant Garamond", "Times New Roman", serif;
+  --sans: "Outfit", Arial, Helvetica, sans-serif;
+  --space: clamp(1.25rem, 4vw, 3.5rem);
+  --max: 1180px;
+  --radius: 2px;
+  --header: 5.75rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--charcoal);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--forest);
+  color: var(--paper);
+  padding: 0.5rem 0.9rem;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--olive);
+  font-weight: 500;
+}
+
+.serif {
+  font-family: var(--serif);
+}

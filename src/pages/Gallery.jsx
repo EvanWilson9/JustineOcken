@@ -1,83 +1,178 @@
-import React from 'react'
+import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function Gallery() {
-
-  const drawings = [
-    '/images/drawings/dog1.jpg',
-    '/images/drawings/dog2.jpg',
-    '/images/drawings/dog3.jpg',
-    '/images/drawings/horse.jpg',
-    '/images/drawings/horse2.jpg',
-    '/images/drawings/horse4.jpg',
-    '/images/drawings/horse5.jpg',
-    '/images/drawings/objects.jpg',
-    '/images/drawings/objects2.jpg',
-    '/images/drawings/objects4.jpg',
-    '/images/drawings/people1.jpg',
-    '/images/drawings/people3.jpg',
-    '/images/drawings/people5.jpg',
-    '/images/drawings/people7.jpg',
-    '/images/drawings/coin1.jpg',
-    '/images/drawings/coin2.jpg',
-    '/images/drawings/coin3.jpg',
-    '/images/drawings/coin4.jpg',
-    '/images/drawings/coin5.jpg',
-    '/images/drawings/coin6.jpg',
-    '/images/drawings/coin7.jpg',
-    '/images/drawings/coin8.jpg',
-    '/images/drawings/coin9.jpg'  
+const drawingFiles = [
+  'dog1.jpg',
+  'dog2.jpg',
+  'dog3.jpg',
+  'dog4.jpg',
+  'horse.jpg',
+  'horse2.jpg',
+  'horse3.jpg',
+  'horse4.jpg',
+  'horse5.jpg',
+  'objects.jpg',
+  'objects2.jpg',
+  'objects4.jpg',
+  'people1.jpg',
+  'people2.jpg',
+  'people3.jpg',
+  'people4.jpg',
+  'people5.jpg',
+  'people6.jpg',
+  'people7.jpg',
+  'coin1.jpg',
+  'coin2.jpg',
+  'coin3.jpg',
+  'coin4.jpg',
+  'coin5.jpg',
+  'coin6.jpg',
+  'coin7.jpg',
+  'coin8.jpg',
+  'coin9.jpg',
 ];
 
-const sculptures = [
-  '/images/sculptures/family.jpg',
-  '/images/sculptures/family2.jpg',
-  '/images/sculptures/brother1.jpg',
-  '/images/sculptures/brother2.jpg',
-  '/images/sculptures/justine.jpg',
-  '/images/sculptures/dog1.jpg',
-  '/images/sculptures/dog2.jpg',
-  '/images/sculptures/dog3.jpg',
-  '/images/sculptures/dog4.jpg',
-  '/images/sculptures/cowboy.jpg',
+const sculptureFiles = [
+  'family.jpg',
+  'family2.jpg',
+  'brother1.jpg',
+  'brother2.jpg',
+  'justine.jpg',
+  'dog1.jpg',
+  'dog2.jpg',
+  'dog3.jpg',
+  'dog4.jpg',
+  'cowboy.jpg',
 ];
 
-  return (
-    <div className='page-container'>
-      <div className='page-wrapper'>
-      <div className='drawings-container'>
-        <div className="gallery-title-background">Drawings</div>
-        <div className='drawings'>
-          {drawings.map((pic)=>{
-            return(
-              <Drawing image={pic}/>
-            )
-          })}
-        </div>
-      </div>
-      <div className='sculptures-container'>
-        <div className='sculptures-background'>
-          <div className="sculptures-title-background">Sculptures</div>
-        </div>
-        <div className='drawings'>
-          {sculptures.map((pic)=>{
-            return(
-              <Drawing image={pic}/>
-            )
-          })}
-        </div>
-      </div>
-      </div>
-    </div>
-    //Add footer and create links for contact, interested in a piece, and socials
-  )
+function workFromFile(file, medium) {
+  return {
+    src: `/images/${medium === 'Sculpture' ? 'sculptures' : 'drawings'}/${file}`,
+    medium,
+  };
 }
 
-function Drawing (props){
-  return(
-  <div className='drawing'>
-    <img src={props.image} alt="Drawing" className="gallery-drawing"/>
-  </div>
-  )
+const works = [
+  ...drawingFiles.map((file) => workFromFile(file, 'Drawing')),
+  ...sculptureFiles.map((file) => workFromFile(file, 'Sculpture')),
+];
+
+function Gallery() {
+  const [filter, setFilter] = useState('All');
+  const [active, setActive] = useState(null);
+
+  const visible = useMemo(() => {
+    if (filter === 'All') return works;
+    return works.filter((work) => work.medium === filter);
+  }, [filter]);
+
+  useEffect(() => {
+    if (active === null) return undefined;
+
+    const onKey = (event) => {
+      if (event.key === 'Escape') setActive(null);
+      if (event.key === 'ArrowRight') {
+        setActive((i) => (i + 1) % visible.length);
+      }
+      if (event.key === 'ArrowLeft') {
+        setActive((i) => (i - 1 + visible.length) % visible.length);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [active, visible.length]);
+
+  useEffect(() => () => {
+    document.body.style.overflow = '';
+  }, []);
+
+  return (
+    <div className="page gallery-page">
+      <header className="page-intro">
+        <p className="kicker">The collection</p>
+        <div className="intro-row">
+          <h1>Drawings &amp; sculpture</h1>
+          <p>
+            Studies of horses, people, still life, and clay figures. Select a
+            work to view it more closely.
+          </p>
+        </div>
+        <div className="filter-row" role="tablist" aria-label="Gallery medium">
+          {['All', 'Drawing', 'Sculpture'].map((item) => (
+            <button
+              key={item}
+              type="button"
+              role="tab"
+              aria-selected={filter === item}
+              className={filter === item ? 'filter-btn is-active' : 'filter-btn'}
+              onClick={() => {
+                setFilter(item);
+                setActive(null);
+              }}
+            >
+              {item === 'All' ? 'All works' : `${item}s`}
+            </button>
+          ))}
+          <span className="filter-count">{visible.length} pieces</span>
+        </div>
+      </header>
+
+      <div className="gallery-grid">
+        {visible.map((work, index) => (
+          <button
+            key={work.src}
+            type="button"
+            className={`gallery-tile tile-${(index % 5) + 1}`}
+            onClick={() => setActive(index)}
+          >
+            <img src={work.src} alt={`Artwork ${index + 1} by Justine Ocken`} />
+          </button>
+        ))}
+      </div>
+
+      <aside className="gallery-note">
+        <p>Interested in a piece, or a commission in a similar spirit?</p>
+        <Link to="/contact" className="text-link">
+          Commission
+        </Link>
+      </aside>
+
+      {active !== null && visible[active] && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Artwork preview"
+          onClick={() => setActive(null)}
+        >
+          <div className="lightbox-inner" onClick={(event) => event.stopPropagation()}>
+            <img
+              src={visible[active].src}
+              alt="Artwork by Justine Ocken"
+            />
+            <div className="lightbox-bar">
+              <div className="lightbox-controls">
+                <button type="button" onClick={() => setActive((i) => (i - 1 + visible.length) % visible.length)}>
+                  Previous
+                </button>
+                <button type="button" onClick={() => setActive((i) => (i + 1) % visible.length)}>
+                  Next
+                </button>
+                <button type="button" onClick={() => setActive(null)}>
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Gallery;
