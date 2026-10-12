@@ -1,31 +1,34 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 function Contact() {
-  const [result, setResult] = useState('');
-  const [status, setStatus] = useState('idle');
+  const [result, setResult] = useState("");
+  const [status, setStatus] = useState("idle");
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    setStatus('sending');
-    setResult('Sending…');
+    setStatus("sending");
+    setResult("Sending…");
     const formData = new FormData(event.target);
 
-    formData.append('access_key', '8f1310d6-55b7-425d-8e4c-bab40f64a599');
+    formData.append(
+      "16d1d6c7-b5ca-471a-aa16-67fc82d22ad6",
+      "8f1310d6-55b7-425d-8e4c-bab40f64a599",
+    );
 
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
       body: formData,
     });
 
     const data = await response.json();
 
     if (data.success) {
-      setStatus('success');
-      setResult('Message received. I will be in touch soon.');
+      setStatus("success");
+      setResult("Message received. I will be in touch soon.");
       event.target.reset();
     } else {
-      console.log('Error', data);
-      setStatus('error');
+      console.log("Error", data);
+      setStatus("error");
       setResult(data.message);
     }
   };
@@ -52,9 +55,7 @@ function Contact() {
           />
           <div className="contact-card">
             <p className="kicker">Prefer social</p>
-            <p>
-              Daily work and finished pieces live on Instagram.
-            </p>
+            <p>Daily work and finished pieces live on Instagram.</p>
             <a
               className="text-link"
               href="https://www.instagram.com/art_justine58/"
@@ -85,8 +86,12 @@ function Contact() {
             />
           </label>
           <div className="form-footer">
-            <button className="btn btn-primary" type="submit" disabled={status === 'sending'}>
-              {status === 'sending' ? 'Sending…' : 'Send message'}
+            <button
+              className="btn btn-primary"
+              type="submit"
+              disabled={status === "sending"}
+            >
+              {status === "sending" ? "Sending…" : "Send message"}
             </button>
             {result && (
               <p className={`form-status is-${status}`} role="status">
